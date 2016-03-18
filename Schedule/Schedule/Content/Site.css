@@ -1,17 +1,18 @@
-﻿html {
-    background-color: #e2e2e2;
-    margin: 0;
-    padding: 0;
+﻿/*
+html {
+    /*background-color: #e2e2e2;!1!
+    /*margin: 0;
+    padding: 0;!1!
 }
 
 body {
-    background-color: #fff;
-    border-top: solid 10px #000;
-    color: #333;
+    /*background-color: #fff;!1!
+    /*border-top: solid 10px #000;!1!
+    /*color: #333;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
-    padding: 0;
+    padding: 0;!1!
 }
 
 a {
@@ -58,13 +59,13 @@ mark {
     visibility: hidden;
 }
 
-h1, h2, h3,
+/*h1, h2, h3,
 h4, h5, h6 {
     color: #000;
     margin-bottom: 0;
     padding-bottom: 0;
-}
-
+}!1!
+/*
 h1 {
     font-size: 2em;
 }
@@ -83,16 +84,16 @@ h4 {
 
 h5, h6 {
     font-size: 1em;
-}
+}!1!
 
-    h5 a:link, h5 a:visited, h5 a:active {
+    /*h5 a:link, h5 a:visited, h5 a:active {
         padding: 0;
         text-decoration: none;
-    }
+    }!1!
 
 
 /* main layout
-----------------------------------------------------------*/
+----------------------------------------------------------!1!
 .content-wrapper {
     margin: 0 auto;
     max-width: 960px;
@@ -104,31 +105,36 @@ h5, h6 {
     padding-bottom: 35px;
 }
 
-    .main-content {
-        background: url("../Images/accent.png") no-repeat;
+    /*.main-content {
+        /*background: url("../Images/accent.png") no-repeat;!2!
         padding-left: 10px;
         padding-top: 30px;
     }
 
     .featured + .main-content {
         background: url("../Images/heroAccent.png") no-repeat;
-    }
+    }!1!
 
-header .content-wrapper {
+/*header .content-wrapper {
     padding-top: 20px; 
-}
+}!1!
 
 footer {
     clear: both;
-    background-color: #e2e2e2;
-    font-size: .8em;
-    height: 100px;
+    background-color: green;
+    /*font-size: .8em;!1!
+    height: 60px;
+
+    /*position: fixed;
+    bottom: 0;
+    left: 0;
+     width: 100%;!1!
 }
 
 
 /* site title
-----------------------------------------------------------*/
-.site-title {
+----------------------------------------------------------!1!
+/*.site-title {
     color: #c8c8c8;
     font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
     font-size: 2.3em;
@@ -140,11 +146,11 @@ footer {
     color: #c8c8c8;
     outline: none;
     text-decoration: none;
-}
+}!1!
 
 
 /* login
-----------------------------------------------------------*/
+----------------------------------------------------------!1!
 #login {
     display: block;
     font-size: .85em;
@@ -178,7 +184,7 @@ footer {
 
 
 /* menu
-----------------------------------------------------------*/
+----------------------------------------------------------!1!
 ul#menu {
     font-size: 1.3em;
     font-weight: 600;
@@ -206,8 +212,8 @@ ul#menu {
 
 
 /* page elements
-----------------------------------------------------------*/
-/* featured */
+----------------------------------------------------------!1!
+/* featured !1!
 .featured {
     background-color: #fff;
 }
@@ -231,7 +237,7 @@ ul#menu {
             font-size: 1.1em;
         }
 
-/* page titles */
+/* page titles !1!
 hgroup.title {
     margin-bottom: 10px;
 }
@@ -245,14 +251,14 @@ hgroup.title h2 {
     margin-left: 3px;
 }
 
-/* features */
+/* features !1!
 section.feature {
     width: 300px;
     float: left;
     padding: 10px;
 }
 
-/* ordered list */
+/* ordered list !1!
 ol.round {
     list-style-type: none;
     padding-left: 0;
@@ -303,7 +309,7 @@ ol.round {
             background: url("../Images/orderedList9.png") no-repeat;
         }
 
-/* content */
+/* content !1!
 article {
     float: left;
     width: 70%;
@@ -328,7 +334,7 @@ aside {
     font-weight: 700;
 }
 
-/* login page */
+/* login page !1!
 #loginForm {
     border-right: solid 2px #c8c8c8;
     float: left;
@@ -380,7 +386,7 @@ aside {
     display: inline;
 }
 
-/* contact */
+/* contact !1!
 .contact h3 {
     font-size: 1.2em;
 }
@@ -394,7 +400,7 @@ aside {
     margin: 5px 0 0 10px;
 }
 
-/* forms */
+/* forms !1!
 fieldset {
     border: none;
     margin: 0;
@@ -470,7 +476,7 @@ textarea {
         margin-right: 4px;
     }
 
-/* info and errors */
+/* info and errors !1!
 .message-info {
     border: 1px solid;
     clear: both;
@@ -496,7 +502,7 @@ textarea {
     color: #e80c4d;
 }
 
-/* styles for validation helpers */
+/* styles for validation helpers !1!
 .field-validation-error {
     color: #e80c4d;
     font-weight: bold;
@@ -526,7 +532,7 @@ input[type="checkbox"].input-validation-error {
 
 
 /* tables
-----------------------------------------------------------*/
+----------------------------------------------------------!1!
 table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -589,23 +595,23 @@ tr.pager td {
 
 /********************
 *   Mobile Styles   *
-********************/
+*******************!1!
 @media only screen and (max-width: 850px) {
 
     /* header
-    ----------------------------------------------------------*/
+    ----------------------------------------------------------!1!
     header .float-left,
     header .float-right {
         float: none;
     }
 
-    /* logo */
+    /* logo !1!
     header .site-title {
         margin: 10px;
         text-align: center;
     }
 
-    /* login */
+    /* login !1!
     #login {
         font-size: .85em;
         margin: 0 0 12px;
@@ -636,7 +642,7 @@ tr.pager td {
             color: #333;
         }
 
-    /* menu */
+    /* menu !1!
     nav {
         margin-bottom: 5px;
     }
@@ -654,7 +660,7 @@ tr.pager td {
 
 
     /* main layout
-    ----------------------------------------------------------*/
+    ----------------------------------------------------------!1!
     .main-content,
     .featured + .main-content {
         background-position: 10px 0;
@@ -669,13 +675,13 @@ tr.pager td {
         padding: 10px;
     }
 
-    /* page content */
+    /* page content !1!
     article, aside {
         float: none;
         width: 100%;
     }
 
-    /* ordered list */
+    /* ordered list !1!
     ol.round {
         list-style-type: none;
         padding-left: 0;
@@ -699,7 +705,7 @@ tr.pager td {
                 background: none;
             }
 
-     /* features */
+     /* features !1!
      section.feature {
         float: none;
         padding: 10px;
@@ -713,12 +719,12 @@ tr.pager td {
             font-weight: 600;
         }
 
-    /* forms */
+    /* forms !1!
     input {
         width: 90%;
     }
 
-    /* login page */
+    /* login page !1!
     #loginForm {
         border-right: none;
         float: none;
@@ -738,7 +744,7 @@ tr.pager td {
 
 
     /* footer
-    ----------------------------------------------------------*/
+    ----------------------------------------------------------!1!
     footer .float-left,
     footer .float-right {
         float: none;
@@ -753,4 +759,38 @@ tr.pager td {
         footer p {
             margin: 0;
         }
+}
+*/
+
+
+body {
+    padding-top: 60px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* footer
+    ----------------------------------------------------------!1!*/
+footer {
+    /*position: fixed;*/
+
 }

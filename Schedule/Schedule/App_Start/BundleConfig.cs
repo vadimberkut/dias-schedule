@@ -46,8 +46,17 @@ namespace Schedule
 
             bundles.Add(new StyleBundle("~/libs/jquery-easyui/css").Include(
                 "~/Libs/jquery-easyui-1.4.4/themes/default/easyui.css",
-                "~/Libs/jquery-easyui-1.4.4/themes/icon.css",
-                "~/Libs/jquery-easyui-1.4.4/demo/demo.css"
+                "~/Libs/jquery-easyui-1.4.4/themes/icon.css"
+                ));
+
+            //Bootstrap
+            bundles.Add(new ScriptBundle("~/Scripts/bootstrap/js").Include(
+                            "~/Scripts/bootstrap.js"
+                            ));
+
+            bundles.Add(new StyleBundle("~/Content/bootstrap/css").Include(
+                "~/Content/bootstrap.css",
+                "~/Content/bootstrap-theme.css"
                 ));
         }
     }
