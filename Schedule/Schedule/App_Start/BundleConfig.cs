@@ -38,6 +38,17 @@ namespace Schedule
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+
+            //jquery-easyui-1.4.4
+            bundles.Add(new ScriptBundle("~/libs/jquery-easyui/js").Include(
+                            "~/Libs/jquery-easyui-1.4.4/jquery.easyui.min.js"
+                            ));
+
+            bundles.Add(new StyleBundle("~/libs/jquery-easyui/css").Include(
+                "~/Libs/jquery-easyui-1.4.4/themes/default/easyui.css",
+                "~/Libs/jquery-easyui-1.4.4/themes/icon.css",
+                "~/Libs/jquery-easyui-1.4.4/demo/demo.css"
+                ));
         }
     }
 }
