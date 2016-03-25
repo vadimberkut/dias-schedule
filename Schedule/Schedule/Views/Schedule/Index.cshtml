@@ -1,174 +1,143 @@
-﻿@{
+﻿@using Schedule.Models
+@*@model Schedule.Models.Schedule*@
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var daysOfWeekList = new List<String>() { "Monday", "Thuesday", "Wednesday", "Thursday", "Friday" };
+    var maxLessonsPerDay = 5;
 }
 
-<h2>Index</h2>
-
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
+
+        <h2>Schedule for <strong>select course</strong></h2>
+
+        <div class="col-md-12">
+            <div class="schedule_div">
+
+                <table>
+                    <tr>
+                        <td class="col_title">Day</td>
+                        <td class="col_title">Lesson</td>
+
+                        @foreach (var group in ViewBag.Groups)
+                        {
+                            <td class="col_title">@group.Title (@group.StudentsAmount)</td>
+                        }
+                    </tr>
+
+                    @foreach (var dayOfWeek in daysOfWeekList)
+                    {
+                        <tr>
+                            <td class="day_of_week" rowspan="5">@dayOfWeek</td>
+                            <td class="lesson_number">1</td>
+
+                            @foreach (var group in ViewBag.Groups)
+                            {
+                                <td id=@String.Format("{0}_{1}_{2}_{3}", ViewBag.Semester, dayOfWeek, 1, group.Id) class="cell">
+                                    @( ViewBag.SchedulesHashtable.Contains(@String.Format("{0}_{1}_{2}_{3}", ViewBag.Semester, dayOfWeek, 1, group.Id)) ? ViewBag.SchedulesHashtable[@String.Format("{0}_{1}_{2}_{3}", ViewBag.Semester, dayOfWeek, 1, group.Id)].Lesson.Title : "")
+                                    @if (ViewBag.SchedulesHashtable.Contains(@String.Format("{0}_{1}_{2}_{3}_{4}", ViewBag.Semester, dayOfWeek, 1, group.Id, LessonFrequency.Constant)))
+                                    {
+                                        @ViewBag.SchedulesHashtable[@String.Format("{0}_{1}_{2}_{3}_{4}", ViewBag.Semester, dayOfWeek, 1, group.Id, LessonFrequency.Constant)].Lesson.Title
+                                    }
+                                    else
+                                    {
+                                        
+                                        if (ViewBag.SchedulesHashtable.Contains(@String.Format("{0}_{1}_{2}_{3}_{4}", ViewBag.Semester, dayOfWeek, 1, group.Id, LessonFrequency.Nominator)))
+                                        {
+                                            <div class="text-primary">
+                                                @ViewBag.SchedulesHashtable[@String.Format("{0}_{1}_{2}_{3}_{4}", ViewBag.Semester, dayOfWeek, 1, group.Id, LessonFrequency.Nominator)].Lesson.Title
+                                            </div>
+                                        }
+                                        if (ViewBag.SchedulesHashtable.Contains(@String.Format("{0}_{1}_{2}_{3}_{4}", ViewBag.Semester, dayOfWeek, 1, group.Id, LessonFrequency.Denominator)))
+                                        {
+                                            <div class="text-danger">
+                                                @ViewBag.SchedulesHashtable[@String.Format("{0}_{1}_{2}_{3}_{4}", ViewBag.Semester, dayOfWeek, 1, group.Id, LessonFrequency.Denominator)].Lesson.Title
+                                            </div>
+                                        }
+                                    }
+                                </td>
+                            }
+                        </tr>
+                        for (int i = 2; i <= maxLessonsPerDay; i++)
+                        {
+                            <tr>
+                                <td class="lesson_number">@i</td>
+
+                                @foreach (var group in ViewBag.Groups)
+                                {
+                                    <td id=@String.Format("{0}_{1}_{2}_{3}", ViewBag.Semester,dayOfWeek, 1, group.Id) class="cell"></td>
+                                }
+                            </tr>
+                        }
+                    }
+
+                </table>
+            </div>
+        </div>
+
+@*    <div class="col-md-4">*@
+@**@
+@*    </div>*@
+
+    
+
     </div>
 </div>
 
-<h2>Creating a School Timetable</h2>
-<div class="demo-info" style="margin-bottom:10px">
-    <div class="demo-tip icon-tip">&nbsp;</div>
-    <div>Click and drag a class to timetable.</div>
+
+<div id="lesson_window" class="easyui-window" title="Add lesson" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:400px;height:500px;padding:10px;">
+    
 </div>
 
-<div style="width:700px;">
-    <div class="left">
-        <table>
-            <tr>
-                <td><div class="item">English</div></td>
-            </tr>
-            <tr>
-                <td><div class="item">Science</div></td>
-            </tr>
-            <tr>
-                <td><div class="item">Music</div></td>
-            </tr>
-            <tr>
-                <td><div class="item">History</div></td>
-            </tr>
-            <tr>
-                <td><div class="item">Computer</div></td>
-            </tr>
-            <tr>
-                <td><div class="item">Mathematics</div></td>
-            </tr>
-            <tr>
-                <td><div class="item">Arts</div></td>
-            </tr>
-            <tr>
-                <td><div class="item">Ethics</div></td>
-            </tr>
-        </table>
-    </div>
-    <div class="right">
-        <table>
-            <tr>
-                <td class="blank"></td>
-                <td class="title">Monday</td>
-                <td class="title">Tuesday</td>
-                <td class="title">Wednesday</td>
-                <td class="title">Thursday</td>
-                <td class="title">Friday</td>
-            </tr>
-            <tr>
-                <td class="time">08:00</td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-            </tr>
-            <tr>
-                <td class="time">09:00</td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-            </tr>
-            <tr>
-                <td class="time">10:00</td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-            </tr>
-            <tr>
-                <td class="time">11:00</td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-            </tr>
-            <tr>
-                <td class="time">12:00</td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-            </tr>
-            <tr>
-                <td class="time">13:00</td>
-                <td class="lunch" colspan="5">Lunch</td>
-            </tr>
-            <tr>
-                <td class="time">14:00</td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-            </tr>
-            <tr>
-                <td class="time">15:00</td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-            </tr>
-            <tr>
-                <td class="time">16:00</td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-                <td class="drop"></td>
-            </tr>
-        </table>
-    </div>
-</div>
 <style type="text/css">
-    .left {
-        width: 120px;
-        float: left;
+
+
+    .schedule_div {
+        /* float: right;
+        width: 570px;*/
     }
 
-        .left table {
-            background: #E0ECFF;
-        }
-
-        .left td {
-            background: #eee;
-        }
-
-    .right {
-        float: right;
-        width: 570px;
+    .schedule_div table {
+        background: #E0ECFF;
+        width: 100%;
     }
 
-        .right table {
-            background: #E0ECFF;
-            width: 100%;
-        }
+    .schedule_div td {
+        background: #fafafa;
+        color: #444;
+        text-align: center;
+        padding: 2px;
+        margin: 2px;
+        border: 1px solid darkgray;
+    }
 
-        .right td {
-            background: #fafafa;
-            color: #444;
-            text-align: center;
-            padding: 2px;
-        }
+    .schedule_div td {
+        background: #b9e5f2;
+    }
 
-        .right td {
-            background: #E0ECFF;
-        }
+    .schedule_div table td.col_title {
+        background: rgb(151, 218, 170);
+    }
 
-            .right td.drop {
-                background: #fafafa;
-                width: 100px;
-            }
+    .schedule_div table td.day_of_week {
+        /*width: 60px;*/
+    }
 
-            .right td.over {
-                background: #FBEC88;
-            }
+    .schedule_div table td.lesson_number {
+        background: #f0f0f0;
+        height: 80px;
+    }
+
+    .schedule_div td.cell {
+        background: #fafafa;
+        /*width: 100px;*/
+    }
+
+    .schedule_div td.over {
+        background: #FBEC88;
+    }
 
     .item {
         text-align: center;
@@ -176,6 +145,7 @@
         background: #fafafa;
         color: #444;
         width: 100px;
+        margin: 2px;
     }
 
     .assigned {
@@ -186,6 +156,8 @@
         background-color: red;
     }
 </style>
+
+
 <script>
     $(function () {
         $('.left .item').draggable({
@@ -224,5 +196,77 @@
                 $(source).remove();
             }
         });
+
+        function parseScheduleItemId(id) {
+            var info = id.split("_");
+            return {
+                semesterId: info[0],
+                dayOfWeek: info[1],
+                lessonNumber: info[2],
+                groupId: info[3]
+            };
+        }
+
+        $('.schedule_div td.cell').dblclick(function (e) {
+            console.log(e);
+            var elementId = e.target.id;
+            var elementInfo = parseScheduleItemId(elementId);
+            console.log(elementInfo);
+            //$("#lesson_window").window('open');
+            //$('#lesson_window').window('refresh', 'get_content.php');
+            $.ajax({
+                url: "@Url.Action("_LessonForm","Schedule")",
+                data: elementInfo,
+                success: function (data) {
+                    //console.log("data=", data);
+                    $("#lesson_window").html(data);
+
+                    $("#LessonType").prop("disabled", true);
+                    $("#TeacherId").prop("disabled", true);
+                    $("#ClassroomId").prop("disabled", true);
+
+                    $("#LessonId").change(function () {
+                        console.log("!!!");
+                        var selectedValue = $("#LessonId option:selected").val();
+                        if (selectedValue === "" || selectedValue.length === 0) {
+                            return;
+                        }
+
+                        $("#LessonType").prop("disabled", false);
+                    });
+
+                    $("#LessonType").change(function () {
+                        var selectedValue = $("#LessonType option:selected").val();
+                        if (selectedValue === "" || selectedValue.length === 0) {
+                            return;
+                        }
+
+                        $("#TeacherId").prop("disabled", false);
+                    });
+
+                    $("#TeacherId").change(function () {
+                        var selectedValue = $("#TeacherId option:selected").val();
+                        if (selectedValue === "" || selectedValue.length === 0) {
+                            return;
+                        }
+
+                        $("#ClassroomId").prop("disabled", false);
+                    });
+
+                    $("#lesson_window").window('open');
+                }
+            });
+        });
+
+
+        $('#lesson_window_close').click(function(e) {
+            $("#lesson_window").window('close');
+        });
+
+        
+
+        function Schedule() {
+            
+        }
     });
 </script>

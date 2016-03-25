@@ -1,0 +1,44 @@
+﻿@model Schedule.Models.ScheduleItem
+
+<div id="lesson_window_form">
+    @*    <form action="@Url.Action("AddLesson","Schedule")" method="POST">*@
+    @using (Html.BeginForm("AddLesson", "Schedule", new {  }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        
+        @Html.HiddenFor(i => i.SemesterId)
+        @Html.HiddenFor(i => i.DayOfWeek)
+        @Html.HiddenFor(i => i.LessonNumber)
+        @Html.HiddenFor(i => i.GroupId)
+
+        <div class="form-group">
+            <label for="LessonId">Lesson</label>
+            @Html.DropDownListFor(i => i.LessonId, ViewBag.Lesson as SelectList, String.Empty, new {@class = "form-control"})
+        </div>
+
+        <div class="form-group">
+            <label for="LessonType">Lesson Type</label>
+            @Html.DropDownListFor(i => i.LessonType, ViewBag.LessonType as SelectList, String.Empty, new {@class = "form-control"})
+        </div>
+
+        <div class="form-group">
+            <label for="TeacherId">Teacher</label>
+            @Html.DropDownListFor(i => i.TeacherId, ViewBag.Teacher as SelectList, String.Empty, new {@class = "form-control"})
+        </div>
+
+        <div class="form-group">
+            <label for="ClassroomId">Classroom</label>
+            @Html.DropDownListFor(i => i.ClassroomId, ViewBag.Classroom as SelectList, String.Empty, new {@class = "form-control"})
+        </div>
+
+        <!-- Allow form submission with keyboard without duplicating the dialog button -->
+            @*            <input type="submit" tabindex="-1" style="position: absolute; top: -1000px">*@
+
+        <div class="form-group">
+            <button id="" type="submit" class="btn btn-success">Save</button>
+        </div>
+    }
+@*    </form>*@
+    <button id="lesson_window_close" class="btn btn-default">Close</button>
+</div>

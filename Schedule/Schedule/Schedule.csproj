@@ -188,6 +188,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Context\ApplicationDbContext.cs" />
+    <Compile Include="Context\ApplicationDbContextInitializer.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
@@ -195,12 +196,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Statics.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Classroom.cs" />
+    <Compile Include="Models\Form3.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\GroupWorkload.cs" />
     <Compile Include="Models\Lesson.cs" />
-    <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Models\Restriction.cs" />
+    <Compile Include="Models\ScheduleItem.cs" />
+    <Compile Include="Models\Semester.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Models\TeacherWorkload.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1027,9 +1032,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Schedule\Index.cshtml" />
+    <Content Include="Views\Schedule\_LessonFormPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

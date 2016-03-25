@@ -285,9 +285,18 @@
 		    (object Dependency_Relationship
 			quid       	"56E595D60200"
 			supplier   	"Use Case View::Choose Teacher"
-			quidu      	"56E156D602DC")))
+			quidu      	"56E156D602DC")
+		    (object Dependency_Relationship
+			quid       	"56F3BEBB039C"
+			supplier   	"Use Case View::Check Restrictions"
+			quidu      	"56F3BE4F0198")))
 	    (object UseCase "Choose Teacher"
-		quid       	"56E156D602DC")
+		quid       	"56E156D602DC"
+		visible_modules 	(list dependency_list
+		    (object Dependency_Relationship
+			quid       	"56F3AD9100B9"
+			supplier   	"Use Case View::Check Restrictions"
+			quidu      	"56F3BE4F0198")))
 	    (object UseCase "Edit Lesson"
 		quid       	"56E15729032D"
 		visible_modules 	(list dependency_list
@@ -298,20 +307,18 @@
 		    (object Dependency_Relationship
 			quid       	"56E596C30108"
 			supplier   	"Use Case View::Choose Classroom"
-			quidu      	"56E156C300E4")))
+			quidu      	"56E156C300E4")
+		    (object Dependency_Relationship
+			quid       	"56F3BE7102BC"
+			supplier   	"Use Case View::Check Restrictions"
+			quidu      	"56F3BE4F0198")))
 	    (object UseCase "Delete Lesson"
-		quid       	"56E157380249")
-	    (object UseCase "Check Schedule accuracy"
-		quid       	"56E1575C0002"
+		quid       	"56E157380249"
 		visible_modules 	(list dependency_list
 		    (object Dependency_Relationship
-			quid       	"56E5962200E2"
-			supplier   	"Use Case View::Choose Teacher"
-			quidu      	"56E156D602DC")
-		    (object Dependency_Relationship
-			quid       	"56E596260235"
-			supplier   	"Use Case View::Delete Lesson"
-			quidu      	"56E157380249")))
+			quid       	"56F3AD9303DA"
+			supplier   	"Use Case View::Check Restrictions"
+			quidu      	"56F3BE4F0198")))
 	    (object UseCase "Browse entities lists"
 		quid       	"56E59269022C"
 		superclasses 	(list inheritance_relationship_list
@@ -324,6 +331,15 @@
 			quid       	"56E592A9006F"
 			supplier   	"Use Case View::login"
 			quidu      	"56E140E70368")))
+	    (object UseCase "Check Restrictions"
+		quid       	"56F3BE4F0198"
+		visible_modules 	(list dependency_list
+		    (object Dependency_Relationship
+			quid       	"56F3BFC90295"
+			supplier   	"Use Case View::Load Data From Restriction Table"
+			quidu      	"56F3BFA501DF")))
+	    (object UseCase "Load Data From Restriction Table"
+		quid       	"56F3BFA501DF")
 	    (object Association "$UNNAMED$0"
 		quid       	"56E140EA0272"
 		roles      	(list role_list
@@ -625,62 +641,26 @@
 			supplier   	"Use Case View::Edit Schedule"
 			quidu      	"56E141900304")))
 	    (object Association "$UNNAMED$75"
-		quid       	"56E1578700DA"
-		roles      	(list role_list
-		    (object Role "$UNNAMED$76"
-			quid       	"56E15788011E"
-			supplier   	"Use Case View::Check Schedule accuracy"
-			quidu      	"56E1575C0002"
-			is_navigable 	TRUE)
-		    (object Role "$UNNAMED$77"
-			quid       	"56E157880120"
-			supplier   	"Use Case View::Delete Lesson"
-			quidu      	"56E157380249")))
-	    (object Association "$UNNAMED$78"
-		quid       	"56E1578B0042"
-		roles      	(list role_list
-		    (object Role "$UNNAMED$79"
-			quid       	"56E1578B03E6"
-			supplier   	"Use Case View::Check Schedule accuracy"
-			quidu      	"56E1575C0002"
-			is_navigable 	TRUE)
-		    (object Role "$UNNAMED$80"
-			quid       	"56E1578C0002"
-			supplier   	"Use Case View::Edit Lesson"
-			quidu      	"56E15729032D")))
-	    (object Association "$UNNAMED$81"
-		quid       	"56E157940112"
-		roles      	(list role_list
-		    (object Role "$UNNAMED$82"
-			quid       	"56E15795014A"
-			supplier   	"Use Case View::Check Schedule accuracy"
-			quidu      	"56E1575C0002"
-			is_navigable 	TRUE)
-		    (object Role "$UNNAMED$83"
-			quid       	"56E15795014E"
-			supplier   	"Use Case View::Choose Teacher"
-			quidu      	"56E156D602DC")))
-	    (object Association "$UNNAMED$84"
 		quid       	"56E5941000A5"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$85"
+		    (object Role "$UNNAMED$76"
 			quid       	"56E59410023B"
 			supplier   	"Use Case View::Browse entities lists"
 			quidu      	"56E59269022C"
 			is_navigable 	TRUE)
-		    (object Role "$UNNAMED$86"
+		    (object Role "$UNNAMED$77"
 			quid       	"56E59410023D"
 			supplier   	"Use Case View::login"
 			quidu      	"56E140E70368")))
-	    (object Association "$UNNAMED$87"
+	    (object Association "$UNNAMED$78"
 		quid       	"56E596AF0111"
 		roles      	(list role_list
-		    (object Role "$UNNAMED$88"
+		    (object Role "$UNNAMED$79"
 			quid       	"56E596B00016"
 			supplier   	"Use Case View::Edit Schedule"
 			quidu      	"56E141900304"
 			is_navigable 	TRUE)
-		    (object Role "$UNNAMED$89"
+		    (object Role "$UNNAMED$80"
 			quid       	"56E596B00018"
 			supplier   	"Use Case View::Regular User"
 			quidu      	"56E1411A0020"))))
@@ -769,8 +749,8 @@
 			fill_color 	13434879
 			quidu      	"56E1439C0180"
 			height     	118)
-		    (object UseCaseView "Use Case View::Watch Shedule" @4
-			location   	(2372, 125)
+		    (object UseCaseView "Use Case View::Manage entities" @4
+			location   	(862, 531)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -783,18 +763,448 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@4
-			    location   	(2372, 263)
+			    location   	(862, 669)
 			    anchor_loc 	1
 			    nlines     	2
 			    max_width  	630
 			    justify    	0
-			    label      	"Watch Shedule")
+			    label      	"Manage entities")
 			icon_style 	"Icon"
 			line_color 	3342489
 			fill_color 	13434879
-			quidu      	"56E1542001D6"
+			quidu      	"56E1420F0315"
 			height     	118)
-		    (object ClassView "Class" "Use Case View::Administrator" @5
+		    (object UseCaseView "Use Case View::Manage Teachers Workload" @5
+			location   	(265, 950)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@5
+			    location   	(265, 1088)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Manage Teachers Workload")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56E15556001D"
+			height     	118)
+		    (object UseCaseView "Use Case View::Manage Teachers" @6
+			location   	(703, 878)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@6
+			    location   	(703, 1016)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Manage Teachers")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56E1549A03C9"
+			height     	118)
+		    (object UseCaseView "Use Case View::Manage Lessons" @7
+			location   	(1044, 878)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@7
+			    location   	(1044, 1016)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Manage Lessons")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56E14452022F"
+			height     	118)
+		    (object UseCaseView "Use Case View::Manage Classroms" @8
+			location   	(1405, 887)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@8
+			    location   	(1405, 1025)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Manage Classroms")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56E1428A020A"
+			height     	118)
+		    (object UseCaseView "Use Case View::Manage Groups" @9
+			location   	(1803, 906)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@9
+			    location   	(1803, 1044)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Manage Groups")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56E155A003D4"
+			height     	118)
+		    (object UseCaseView "Use Case View::Perform action" @10
+			location   	(1172, 1228)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@10
+			    location   	(1172, 1366)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Perform action")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56E142A202AC"
+			height     	118)
+		    (object UseCaseView "Use Case View::Manage Groups Workload" @11
+			location   	(2278, 959)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@11
+			    location   	(2278, 1097)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Manage Groups Workload")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56E155A90081"
+			height     	118)
+		    (object UseCaseView "Use Case View::Add Lesson" @12
+			location   	(3001, 493)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@12
+			    location   	(3001, 631)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Add Lesson")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56E156B303B3"
+			height     	118)
+		    (object UseCaseView "Use Case View::Edit Lesson" @13
+			location   	(3396, 125)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@13
+			    location   	(3396, 263)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Edit Lesson")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56E15729032D"
+			height     	118)
+		    (object UseCaseView "Use Case View::Choose Classroom" @14
+			location   	(3455, 565)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@14
+			    location   	(3455, 703)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Choose Classroom")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56E156C300E4"
+			height     	118)
+		    (object UseCaseView "Use Case View::Delete Lesson" @15
+			location   	(2762, 1143)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@15
+			    location   	(2762, 1281)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Delete Lesson")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56E157380249"
+			height     	118)
+		    (object UseCaseView "Use Case View::Check Restrictions" @16
+			location   	(3999, 787)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@16
+			    location   	(3999, 925)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Check Restrictions")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56F3BE4F0198"
+			height     	118)
+		    (object UseCaseView "Use Case View::Choose Teacher" @17
+			location   	(3124, 978)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@17
+			    location   	(3124, 1116)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Choose Teacher")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56E156D602DC"
+			height     	118)
+		    (object DependencyView "" @18
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"56E143A400F8"
+			client     	@1
+			supplier   	@10
+			vertices   	(list Points
+			    (801, 1439)
+			    (1035, 1307))
+			line_style 	0)
+		    (object DependencyView "" @19
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"56E143A800ED"
+			client     	@2
+			supplier   	@10
+			vertices   	(list Points
+			    (1125, 1596)
+			    (1149, 1391))
+			line_style 	0)
+		    (object DependencyView "" @20
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"56E143B0010B"
+			client     	@3
+			supplier   	@10
+			vertices   	(list Points
+			    (1534, 1467)
+			    (1308, 1317))
+			line_style 	0)
+		    (object DependencyView "" @21
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"56E593B90046"
+			client     	@5
+			supplier   	@10
+			vertices   	(list Points
+			    (522, 1027)
+			    (1061, 1193))
+			line_style 	0)
+		    (object DependencyView "" @22
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"56E593BD00CE"
+			client     	@7
+			supplier   	@10
+			vertices   	(list Points
+			    (1102, 1041)
+			    (1149, 1169))
+			line_style 	0)
+		    (object DependencyView "" @23
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"56E593BF00EC"
+			client     	@8
+			supplier   	@10
+			vertices   	(list Points
+			    (1290, 1050)
+			    (1207, 1170))
+			line_style 	0)
+		    (object DependencyView "" @24
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"56E593C1009C"
+			client     	@9
+			supplier   	@10
+			vertices   	(list Points
+			    (1653, 980)
+			    (1280, 1171))
+			line_style 	0)
+		    (object DependencyView "" @25
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"56E593C3008D"
+			client     	@11
+			supplier   	@10
+			vertices   	(list Points
+			    (2168, 984)
+			    (1280, 1200))
+			line_style 	0)
+		    (object UseCaseView "Use Case View::login" @26
+			location   	(794, 212)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@26
+			    location   	(794, 350)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"login")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56E140E70368"
+			height     	118)
+		    (object ClassView "Class" "Use Case View::Administrator" @27
 			ShowCompartmentStereotypes 	TRUE
 			IncludeAttribute 	TRUE
 			IncludeOperation 	TRUE
@@ -810,7 +1220,7 @@
 			    color      	0
 			    default_color 	TRUE)
 			label      	(object ItemLabel
-			    Parent_View 	@5
+			    Parent_View 	@27
 			    location   	(255, 319)
 			    anchor_loc 	1
 			    nlines     	2
@@ -823,462 +1233,7 @@
 			quidu      	"56E140DD014F"
 			annotation 	8
 			autoResize 	TRUE)
-		    (object UseCaseView "Use Case View::Manage entities" @6
-			location   	(862, 531)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@6
-			    location   	(862, 669)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"Manage entities")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"56E1420F0315"
-			height     	118)
-		    (object UseCaseView "Use Case View::Manage Teachers Workload" @7
-			location   	(265, 950)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@7
-			    location   	(265, 1088)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"Manage Teachers Workload")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"56E15556001D"
-			height     	118)
-		    (object UseCaseView "Use Case View::Manage Teachers" @8
-			location   	(703, 878)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@8
-			    location   	(703, 1016)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"Manage Teachers")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"56E1549A03C9"
-			height     	118)
-		    (object UseCaseView "Use Case View::Manage Lessons" @9
-			location   	(1044, 878)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@9
-			    location   	(1044, 1016)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"Manage Lessons")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"56E14452022F"
-			height     	118)
-		    (object UseCaseView "Use Case View::Manage Classroms" @10
-			location   	(1405, 887)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@10
-			    location   	(1405, 1025)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"Manage Classroms")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"56E1428A020A"
-			height     	118)
-		    (object UseCaseView "Use Case View::Manage Groups" @11
-			location   	(1803, 906)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@11
-			    location   	(1803, 1044)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"Manage Groups")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"56E155A003D4"
-			height     	118)
-		    (object UseCaseView "Use Case View::Perform action" @12
-			location   	(1172, 1228)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@12
-			    location   	(1172, 1366)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"Perform action")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"56E142A202AC"
-			height     	118)
-		    (object UseCaseView "Use Case View::Manage Groups Workload" @13
-			location   	(2278, 959)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@13
-			    location   	(2278, 1097)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"Manage Groups Workload")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"56E155A90081"
-			height     	118)
-		    (object UseCaseView "Use Case View::Add Lesson" @14
-			location   	(3001, 493)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@14
-			    location   	(3001, 631)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"Add Lesson")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"56E156B303B3"
-			height     	118)
-		    (object UseCaseView "Use Case View::Edit Lesson" @15
-			location   	(3255, 137)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@15
-			    location   	(3255, 275)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"Edit Lesson")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"56E15729032D"
-			height     	118)
-		    (object UseCaseView "Use Case View::Choose Classroom" @16
-			location   	(3418, 559)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@16
-			    location   	(3418, 697)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"Choose Classroom")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"56E156C300E4"
-			height     	118)
-		    (object UseCaseView "Use Case View::Delete Lesson" @17
-			location   	(2762, 1143)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@17
-			    location   	(2762, 1281)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"Delete Lesson")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"56E157380249"
-			height     	118)
-		    (object UseCaseView "Use Case View::Check Schedule accuracy" @18
-			location   	(3584, 1125)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@18
-			    location   	(3584, 1263)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"Check Schedule accuracy")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"56E1575C0002"
-			height     	118)
-		    (object UseCaseView "Use Case View::Choose Teacher" @19
-			location   	(3225, 871)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@19
-			    location   	(3225, 1009)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"Choose Teacher")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"56E156D602DC"
-			height     	118)
-		    (object DependencyView "" @20
-			stereotype 	TRUE
-			line_color 	3342489
-			quidu      	"56E143A400F8"
-			client     	@1
-			supplier   	@12
-			vertices   	(list Points
-			    (801, 1439)
-			    (1035, 1307))
-			line_style 	0)
-		    (object DependencyView "" @21
-			stereotype 	TRUE
-			line_color 	3342489
-			quidu      	"56E143A800ED"
-			client     	@2
-			supplier   	@12
-			vertices   	(list Points
-			    (1125, 1596)
-			    (1149, 1391))
-			line_style 	0)
-		    (object DependencyView "" @22
-			stereotype 	TRUE
-			line_color 	3342489
-			quidu      	"56E143B0010B"
-			client     	@3
-			supplier   	@12
-			vertices   	(list Points
-			    (1534, 1467)
-			    (1308, 1317))
-			line_style 	0)
-		    (object DependencyView "" @23
-			stereotype 	TRUE
-			line_color 	3342489
-			quidu      	"56E593B90046"
-			client     	@7
-			supplier   	@12
-			vertices   	(list Points
-			    (522, 1027)
-			    (1061, 1193))
-			line_style 	0)
-		    (object DependencyView "" @24
-			stereotype 	TRUE
-			line_color 	3342489
-			quidu      	"56E593BD00CE"
-			client     	@9
-			supplier   	@12
-			vertices   	(list Points
-			    (1102, 1041)
-			    (1149, 1169))
-			line_style 	0)
-		    (object DependencyView "" @25
-			stereotype 	TRUE
-			line_color 	3342489
-			quidu      	"56E593BF00EC"
-			client     	@10
-			supplier   	@12
-			vertices   	(list Points
-			    (1290, 1050)
-			    (1207, 1170))
-			line_style 	0)
-		    (object DependencyView "" @26
-			stereotype 	TRUE
-			line_color 	3342489
-			quidu      	"56E593C1009C"
-			client     	@11
-			supplier   	@12
-			vertices   	(list Points
-			    (1653, 980)
-			    (1280, 1171))
-			line_style 	0)
-		    (object DependencyView "" @27
-			stereotype 	TRUE
-			line_color 	3342489
-			quidu      	"56E593C3008D"
-			client     	@13
-			supplier   	@12
-			vertices   	(list Points
-			    (2168, 984)
-			    (1280, 1200))
-			line_style 	0)
-		    (object UseCaseView "Use Case View::login" @28
-			location   	(794, 212)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@28
-			    location   	(794, 350)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"login")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"56E140E70368"
-			height     	118)
-		    (object AssociationViewNew "$UNNAMED$0" @29
+		    (object AssociationViewNew "$UNNAMED$0" @28
 			location   	(498, 180)
 			font       	(object Font
 			    size       	10
@@ -1294,31 +1249,31 @@
 			line_color 	3342489
 			quidu      	"56E140EA0272"
 			roleview_list 	(list RoleViews
-			    (object RoleView "$UNNAMED$1" @30
-				Parent_View 	@29
+			    (object RoleView "$UNNAMED$1" @29
+				Parent_View 	@28
 				location   	(309, -23)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"56E140EB0132"
-				client     	@29
-				supplier   	@28
+				client     	@28
+				supplier   	@26
 				vertices   	(list Points
 				    (498, 180)
 				    (684, 198))
 				line_style 	0)
-			    (object RoleView "$UNNAMED$2" @31
-				Parent_View 	@29
+			    (object RoleView "$UNNAMED$2" @30
+				Parent_View 	@28
 				location   	(309, -23)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"56E140EB0134"
-				client     	@29
-				supplier   	@5
+				client     	@28
+				supplier   	@27
 				vertices   	(list Points
 				    (498, 180)
 				    (312, 163))
 				line_style 	0)))
-		    (object UseCaseView "Use Case View::Browse entities lists" @32
+		    (object UseCaseView "Use Case View::Browse entities lists" @31
 			location   	(353, 547)
 			font       	(object Font
 			    size       	10
@@ -1331,7 +1286,7 @@
 			    color      	0
 			    default_color 	TRUE)
 			label      	(object ItemLabel
-			    Parent_View 	@32
+			    Parent_View 	@31
 			    location   	(353, 685)
 			    anchor_loc 	1
 			    nlines     	2
@@ -1343,117 +1298,177 @@
 			fill_color 	13434879
 			quidu      	"56E59269022C"
 			height     	118)
-		    (object DependencyView "" @33
+		    (object DependencyView "" @32
 			stereotype 	TRUE
 			line_color 	3342489
 			quidu      	"56E593BB0083"
-			client     	@8
-			supplier   	@12
+			client     	@6
+			supplier   	@10
 			vertices   	(list Points
 			    (869, 1000)
 			    (1093, 1169))
 			line_style 	0)
-		    (object InheritView "" @34
+		    (object InheritView "" @33
 			stereotype 	TRUE
 			line_color 	3342489
 			quidu      	"56E5947E0217"
-			client     	@7
-			supplier   	@6
+			client     	@5
+			supplier   	@4
 			vertices   	(list Points
 			    (343, 891)
 			    (712, 634))
 			line_style 	0)
-		    (object InheritView "" @35
+		    (object InheritView "" @34
 			stereotype 	TRUE
 			line_color 	3342489
 			quidu      	"56E594800040"
-			client     	@8
-			supplier   	@6
+			client     	@6
+			supplier   	@4
 			vertices   	(list Points
 			    (725, 819)
 			    (785, 694))
 			line_style 	0)
-		    (object InheritView "" @36
+		    (object InheritView "" @35
 			stereotype 	TRUE
 			line_color 	3342489
 			quidu      	"56E59481034A"
-			client     	@9
-			supplier   	@6
+			client     	@7
+			supplier   	@4
 			vertices   	(list Points
 			    (1011, 819)
 			    (945, 694))
 			line_style 	0)
-		    (object InheritView "" @37
+		    (object InheritView "" @36
 			stereotype 	TRUE
 			line_color 	3342489
 			quidu      	"56E5948302E9"
-			client     	@10
-			supplier   	@6
+			client     	@8
+			supplier   	@4
 			vertices   	(list Points
 			    (1317, 829)
 			    (1011, 628))
 			line_style 	0)
-		    (object InheritView "" @38
+		    (object InheritView "" @37
 			stereotype 	TRUE
 			line_color 	3342489
 			quidu      	"56E59485034A"
-			client     	@11
-			supplier   	@6
+			client     	@9
+			supplier   	@4
 			vertices   	(list Points
 			    (1693, 861)
 			    (970, 571))
 			line_style 	0)
-		    (object InheritView "" @39
+		    (object InheritView "" @38
 			stereotype 	TRUE
 			line_color 	3342489
 			quidu      	"56E594880059"
-			client     	@13
-			supplier   	@6
+			client     	@11
+			supplier   	@4
 			vertices   	(list Points
 			    (2168, 922)
 			    (970, 560))
 			line_style 	0)
-		    (object DependencyView "" @40
+		    (object DependencyView "" @39
 			stereotype 	TRUE
 			line_color 	3342489
 			quidu      	"56E595D20023"
-			client     	@14
-			supplier   	@16
+			client     	@12
+			supplier   	@14
 			vertices   	(list Points
-			    (3109, 506)
-			    (3306, 539))
+			    (3109, 508)
+			    (3344, 542))
 			line_style 	0)
-		    (object DependencyView "" @41
+		    (object DependencyView "" @40
 			stereotype 	TRUE
 			line_color 	3342489
 			quidu      	"56E5960402C2"
-			client     	@14
-			supplier   	@19
+			client     	@12
+			supplier   	@17
 			vertices   	(list Points
-			    (3096, 656)
-			    (3188, 813))
+			    (3040, 656)
+			    (3106, 920))
 			line_style 	0)
-		    (object DependencyView "" @42
-			stereotype 	TRUE
+		    (object UseCaseView "Use Case View::Watch Shedule" @41
+			location   	(2372, 125)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@41
+			    location   	(2372, 263)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Watch Shedule")
+			icon_style 	"Icon"
 			line_color 	3342489
-			quidu      	"56E5962200E2"
-			client     	@18
-			supplier   	@19
-			vertices   	(list Points
-			    (3504, 1067)
-			    (3377, 977))
-			line_style 	0)
+			fill_color 	13434879
+			quidu      	"56E1542001D6"
+			height     	118)
+		    (object UseCaseView "Use Case View::Edit Schedule" @42
+			location   	(2381, 553)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@42
+			    location   	(2381, 691)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Edit Schedule")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56E141900304"
+			height     	118)
 		    (object DependencyView "" @43
 			stereotype 	TRUE
 			line_color 	3342489
-			quidu      	"56E596260235"
-			client     	@18
-			supplier   	@17
+			quidu      	"56E595CE00E2"
+			client     	@42
+			supplier   	@12
 			vertices   	(list Points
-			    (3472, 1125)
-			    (2870, 1138))
+			    (2489, 540)
+			    (2891, 502))
 			line_style 	0)
-		    (object ClassView "Class" "Use Case View::Regular User" @44
+		    (object DependencyView "" @44
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"56E5963A0293"
+			client     	@42
+			supplier   	@15
+			vertices   	(list Points
+			    (2484, 716)
+			    (2722, 1084))
+			line_style 	0)
+		    (object DependencyView "" @45
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"56E5963D006F"
+			client     	@42
+			supplier   	@13
+			vertices   	(list Points
+			    (2489, 505)
+			    (3286, 166))
+			line_style 	0)
+		    (object ClassView "Class" "Use Case View::Regular User" @46
 			ShowCompartmentStereotypes 	TRUE
 			IncludeAttribute 	TRUE
 			IncludeOperation 	TRUE
@@ -1469,7 +1484,7 @@
 			    color      	0
 			    default_color 	TRUE)
 			label      	(object ItemLabel
-			    Parent_View 	@44
+			    Parent_View 	@46
 			    location   	(1781, 285)
 			    anchor_loc 	1
 			    nlines     	2
@@ -1482,7 +1497,7 @@
 			quidu      	"56E1411A0020"
 			annotation 	8
 			autoResize 	TRUE)
-		    (object AssociationViewNew "$UNNAMED$12" @45
+		    (object AssociationViewNew "$UNNAMED$12" @47
 			location   	(2050, 125)
 			font       	(object Font
 			    size       	10
@@ -1498,87 +1513,32 @@
 			line_color 	3342489
 			quidu      	"56E154320156"
 			roleview_list 	(list RoleViews
-			    (object RoleView "$UNNAMED$13" @46
-				Parent_View 	@45
+			    (object RoleView "$UNNAMED$13" @48
+				Parent_View 	@47
 				location   	(-1001, -1381)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"56E15433018F"
-				client     	@45
-				supplier   	@4
+				client     	@47
+				supplier   	@41
 				vertices   	(list Points
 				    (2050, 125)
 				    (2262, 125))
 				line_style 	0)
-			    (object RoleView "$UNNAMED$14" @47
-				Parent_View 	@45
+			    (object RoleView "$UNNAMED$14" @49
+				Parent_View 	@47
 				location   	(-1001, -1381)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"56E154330191"
-				client     	@45
-				supplier   	@44
+				client     	@47
+				supplier   	@46
 				vertices   	(list Points
 				    (2050, 125)
 				    (1838, 125))
 				line_style 	0)))
-		    (object UseCaseView "Use Case View::Edit Schedule" @48
-			location   	(2381, 553)
-			font       	(object Font
-			    size       	10
-			    face       	"Arial"
-			    charSet    	204
-			    bold       	FALSE
-			    italics    	FALSE
-			    underline  	FALSE
-			    strike     	FALSE
-			    color      	0
-			    default_color 	TRUE)
-			label      	(object ItemLabel
-			    Parent_View 	@48
-			    location   	(2381, 691)
-			    anchor_loc 	1
-			    nlines     	2
-			    max_width  	630
-			    justify    	0
-			    label      	"Edit Schedule")
-			icon_style 	"Icon"
-			line_color 	3342489
-			fill_color 	13434879
-			quidu      	"56E141900304"
-			height     	118)
-		    (object DependencyView "" @49
-			stereotype 	TRUE
-			line_color 	3342489
-			quidu      	"56E595CE00E2"
-			client     	@48
-			supplier   	@14
-			vertices   	(list Points
-			    (2489, 540)
-			    (2891, 502))
-			line_style 	0)
-		    (object DependencyView "" @50
-			stereotype 	TRUE
-			line_color 	3342489
-			quidu      	"56E5963A0293"
-			client     	@48
-			supplier   	@17
-			vertices   	(list Points
-			    (2484, 716)
-			    (2722, 1084))
-			line_style 	0)
-		    (object DependencyView "" @51
-			stereotype 	TRUE
-			line_color 	3342489
-			quidu      	"56E5963D006F"
-			client     	@48
-			supplier   	@15
-			vertices   	(list Points
-			    (2489, 497)
-			    (3139, 190))
-			line_style 	0)
-		    (object AssociationViewNew "$UNNAMED$87" @52
-			location   	(2100, 353)
+		    (object AssociationViewNew "$UNNAMED$78" @50
+			location   	(2068, 329)
 			font       	(object Font
 			    size       	10
 			    face       	"Arial"
@@ -1593,69 +1553,134 @@
 			line_color 	3342489
 			quidu      	"56E596AF0111"
 			roleview_list 	(list RoleViews
-			    (object RoleView "$UNNAMED$88" @53
-				Parent_View 	@52
-				location   	(319, 228)
+			    (object RoleView "$UNNAMED$79" @51
+				Parent_View 	@50
+				location   	(287, 204)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"56E596B00016"
-				client     	@52
-				supplier   	@48
+				client     	@50
+				supplier   	@42
 				vertices   	(list Points
-				    (2100, 353)
+				    (2068, 329)
 				    (2298, 493))
 				line_style 	0)
-			    (object RoleView "$UNNAMED$89" @54
-				Parent_View 	@52
-				location   	(319, 228)
+			    (object RoleView "$UNNAMED$80" @52
+				Parent_View 	@50
+				location   	(287, 204)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"56E596B00018"
-				client     	@52
-				supplier   	@44
+				client     	@50
+				supplier   	@46
 				vertices   	(list Points
-				    (2100, 353)
-				    (1903, 213))
+				    (2068, 329)
+				    (1838, 165))
 				line_style 	0)))
-		    (object DependencyView "" @55
+		    (object DependencyView "" @53
 			stereotype 	TRUE
 			line_color 	3342489
 			quidu      	"56E596C30108"
-			client     	@15
-			supplier   	@16
+			client     	@13
+			supplier   	@14
 			vertices   	(list Points
-			    (3316, 300)
-			    (3392, 499))
+			    (3416, 288)
+			    (3445, 506))
 			line_style 	0)
-		    (object DependencyView "" @56
+		    (object DependencyView "" @54
 			stereotype 	TRUE
 			line_color 	3342489
 			quidu      	"56E592A9006F"
-			client     	@32
-			supplier   	@28
+			client     	@31
+			supplier   	@26
 			vertices   	(list Points
 			    (424, 488)
 			    (717, 268))
 			line_style 	0)
-		    (object DependencyView "" @57
+		    (object DependencyView "" @55
 			stereotype 	TRUE
 			line_color 	3342489
 			quidu      	"56E59731006E"
-			client     	@6
-			supplier   	@28
+			client     	@4
+			supplier   	@26
 			vertices   	(list Points
 			    (845, 471)
 			    (826, 375))
 			line_style 	0)
-		    (object DependencyView "" @58
+		    (object DependencyView "" @56
 			stereotype 	TRUE
 			line_color 	3342489
 			quidu      	"56E5973301E1"
-			client     	@48
-			supplier   	@28
+			client     	@42
+			supplier   	@26
 			vertices   	(list Points
 			    (2271, 527)
 			    (902, 231))
+			line_style 	0)
+		    (object DependencyView "" @57
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"56F3AD9100B9"
+			client     	@17
+			supplier   	@16
+			vertices   	(list Points
+			    (3232, 951)
+			    (3887, 808))
+			line_style 	0)
+		    (object DependencyView "" @58
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"56F3BEBB039C"
+			client     	@14
+			supplier   	@16
+			vertices   	(list Points
+			    (3632, 635)
+			    (3889, 741))
+			line_style 	0)
+		    (object DependencyView "" @59
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"56F3BE7102BC"
+			client     	@13
+			supplier   	@16
+			vertices   	(list Points
+			    (3509, 250)
+			    (3943, 728))
+			line_style 	0)
+		    (object UseCaseView "Use Case View::Load Data From Restriction Table" @60
+			location   	(4011, 1100)
+			font       	(object Font
+			    size       	10
+			    face       	"Arial"
+			    charSet    	204
+			    bold       	FALSE
+			    italics    	FALSE
+			    underline  	FALSE
+			    strike     	FALSE
+			    color      	0
+			    default_color 	TRUE)
+			label      	(object ItemLabel
+			    Parent_View 	@60
+			    location   	(4011, 1238)
+			    anchor_loc 	1
+			    nlines     	2
+			    max_width  	630
+			    justify    	0
+			    label      	"Load Data From Restriction Table")
+			icon_style 	"Icon"
+			line_color 	3342489
+			fill_color 	13434879
+			quidu      	"56F3BFA501DF"
+			height     	118)
+		    (object DependencyView "" @61
+			stereotype 	TRUE
+			line_color 	3342489
+			quidu      	"56F3BFC90295"
+			client     	@16
+			supplier   	@60
+			vertices   	(list Points
+			    (4004, 950)
+			    (4006, 1041))
 			line_style 	0)))))
     root_category 	(object Class_Category "Logical View"
 	quid       	"56E13F9000F8"
