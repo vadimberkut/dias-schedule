@@ -1,0 +1,140 @@
+﻿body {
+}
+
+
+    .schedule_div {
+        /* float: right;
+        width: 570px;*/
+    }
+
+    .schedule_div table {
+        /*background: #E0ECFF;*/
+        width: 100%;
+    }
+
+    .schedule_div td {
+        background: rgba(115, 144, 152, 0.39);
+        color: #444;
+        text-align: center;
+        padding: 2px;
+        margin: 2px;
+        border: 1px solid darkgray;
+    }
+    .day_of_week {
+        width: 60px;
+        /*font-style: italic;*/
+        font-family: Verdana;
+        font-size: 100%;
+    } 
+    .day_of_week div {
+        /* */
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -webkit-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+    }
+
+    .schedule_div table td.col_title {
+        height: 30px;
+        color: white;
+        background: rgb(53, 38, 95);
+    }
+
+    .schedule_div table td.day_of_week {
+        /*width: 60px;*/
+    }
+
+    .schedule_div table td.lesson_number {
+        background: #f0f0f0;
+        /*height: 80px;*/
+        width: 60px;
+    }
+
+    .schedule_div td.cell {
+        background: #ffffff;
+        width: 140px;
+        font-size: 85%;
+    }
+
+    .fa-color-custom {
+        color: rgba(0, 0, 0, 0.64);
+    }
+
+        .schedule_div td.cell .constant_schedule_item {
+            /*/*height: 76px;
+            background-color: aqua;
+            vertical-align: middle;
+            padding: 20px 0 20px 0;!1!
+            /*padding: 30% 0 40% 0;!1!
+            height: 76px;
+            width: 200px;
+            background: aqua;
+            /*margin: 10px;!1!
+            text-align: center;
+            /*display: table-cell;!1!
+            vertical-align: middle;
+            /*word-break: break-all;!1!*/
+            
+            font-size: 100%;
+            color: midnightblue;
+        }
+
+        .schedule_div td.cell .nominator_schedule_item {
+            font-size: 80%;
+            color: mediumorchid;
+        }
+
+        .schedule_div td.cell .denominator_schedule_item {
+            font-size: 80%;
+            color: rgb(114, 112, 219);
+        }
+    
+     .schedule_div td.over {
+        background: #FBEC88;
+    }
+
+    .item {
+        text-align: center;
+        border: 1px solid #499B33;
+        background: #fafafa;
+        color: #444;
+        width: 100px;
+        margin: 2px;
+    }
+
+    .assigned {
+        border: 1px solid #BC2A4D;
+    }
+
+    .trash {
+        background-color: red;
+    }
+
+    .custom_hr {
+        margin: 4px 0 4px 0;
+        /*padding: 0;*/
+        border: 0;
+        border-top: 1px solid black;
+    }
+
+    .cursor_pointer {
+        cursor: pointer;
+    }
+
+    .font_small {
+        font-size: small;
+    }
+
+    .table_add_lesson_buttons {
+        border: 0;
+        background-color: transparent;
+    }
+    .table_add_lesson_buttons td {
+        border: 0;
+        background-color: transparent;
+    }
+
+    .transparent_no_borders td {
+        border: 0;
+        background-color: transparent;
+    }

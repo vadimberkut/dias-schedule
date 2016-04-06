@@ -1,0 +1,72 @@
+﻿@model ScheduleApp.Models.ScheduleItem
+
+<div id="lesson_window_form_div">
+
+    <div class="">
+        <p>Group - @Model.Group.Title</p>
+        <p>Day - @Model.DayOfWeek</p>
+        <p>Lesson Number - @Model.LessonNumber</p>
+    </div>
+
+    @*    <form action="@Url.Action("AddLesson","Schedule")" method="POST">*@
+    @using (Html.BeginForm("AddLesson", "Schedule", new { }, FormMethod.Post, new { id = "lesson_add_form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(i => i.SemesterId)
+        @Html.HiddenFor(i => i.DayOfWeek)
+        @Html.HiddenFor(i => i.LessonNumber)
+        @Html.HiddenFor(i => i.GroupId)
+
+        <div class="form-group">
+            <label for="LessonId">Lesson</label>
+            @Html.DropDownListFor(i => i.LessonId, ViewBag.Lesson as SelectList, String.Empty, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label for="LessonType">Lesson Type</label>
+            @Html.DropDownListFor(i => i.LessonType, ViewBag.LessonType as SelectList, String.Empty, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label for="LessonFrequency">Lesson Frequency</label>
+            @Html.DropDownListFor(i => i.LessonFrequency, ViewBag.LessonFrequency as SelectList, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label for="TeacherId">Teacher</label>
+            @Html.DropDownListFor(i => i.TeacherId, ViewBag.Teacher as SelectList, String.Empty, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label for="ClassroomId">Classroom</label>
+            @Html.DropDownListFor(i => i.ClassroomId, ViewBag.Classroom as SelectList, String.Empty, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <div id="GeneralErrorPlace" class="">
+            </div>
+        </div>
+
+
+            <!-- Allow form submission with keyboard without duplicating the dialog button -->
+            @*            <input type="submit" tabindex="-1" style="position: absolute; top: -1000px">*@
+
+            <div id="lesson_dialog_error" class="form-group hidden">
+                <div class="ui-widget">
+                    <div class="ui-state-error ui-corner-all" style="padding: 0 .7em; margin-top: 3px">
+                        <span>
+                    <span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+                    <span id="error_text" class="" style="font-size: small"></span>
+                </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button id="FormSubmitButtom" type="submit" class="btn btn-success">Save</button>
+            </div>
+            }
+            @*    </form>*@
+        </div>

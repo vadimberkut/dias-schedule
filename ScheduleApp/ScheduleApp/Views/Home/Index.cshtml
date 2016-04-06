@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    
+    
+
+    <div class="row">
+        <div class="col-md-4">
+            <p><img class="img-responsive" src="@Url.Content("~/Content/Images/logo1.png")" /></p>
+        </div>
+        <div class="col-md-8">
+            <h1>ASP.NET Schedule</h1>
+            <p class="lead"></p>
+            <p>
+                <a href="@Url.Action("Index","Schedule")" class="btn btn-primary btn-large">Try It! &raquo;</a>
+            </p>
+        </div>    
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+          View lessons  
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Schedule")">Go &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>For Admin</h2>
+        <p>Get full acess.</p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Schedule")">Go to&raquo;</a></p>
+    </div>
+</div>

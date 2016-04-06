@@ -1,0 +1,543 @@
+﻿@using ScheduleApp.Models
+@using ScheduleApp.Repositories
+@model ScheduleApp.ViewModels.ScheduleViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var AccessMode = ViewBag.AccessMode == null ? "Full" : ViewBag.AccessMode;
+}
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <h2>View Schedule
+
+        </h2>
+
+        <h4>
+            <div class="form-group">
+                <label for="selectCourse">Select course</label>
+                <select id="selectCourse" class="selectpicker form-control" data-width="80px">
+                    @for (int i = 1; i <= Model.MAX_COURSES; i++)
+                    {
+                        if (i == Model.course)
+                        {
+                            <option selected="selected">@i</option>
+                        }
+                        else
+                        {
+                            <option>@i</option>
+                        }
+                    }
+                </select>
+            </div>
+
+        </h4>
+
+            <div class="form-group">
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default">Left</button>
+                    <button type="button" class="btn btn-default">Middle</button>
+                    <button type="button" class="btn btn-default">Right</button>
+                </div>
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select Access Mode
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">View</a></li>
+                        <li><a href="#">Edit</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        
+
+        <div class="col-lg-12">
+            <div class="schedule_div">
+ 
+                <table>
+                    <tr>
+                        <td class="col_title">Day</td>
+                        <td class="col_title">№</td>
+
+                        @foreach (var group in Model.Groups)
+                        {
+                            <td class="col_title">@group.Title (@group.StudentsAmount)</td>
+                        }
+                    </tr>
+
+                    @foreach (var dayOfWeek in Model.WorkdaysOfWeek)
+                    {
+                        for (int i = 1; i <= Model.MAX_LESSONS_PER_DAY; i++)
+                        {
+                            <tr>
+                                @if (i == 1)
+                                {
+                                  <td class="day_of_week" rowspan="5"><div>@dayOfWeek</div></td>  
+                                }
+                                
+                                <td class="lesson_number">@i</td>
+
+                                @foreach (var group in Model.Groups)
+                                {
+                                    <td id=@ScheduleRepository.GetSheduleItemKey(Model.Semester.Id, dayOfWeek, i, group.Id) class="cell">
+
+                                        @if (Model.CheckScheduleItem(Model.Semester.Id, dayOfWeek, i, group.Id))
+                                        {
+                                             if (Model.CheckScheduleItem(Model.Semester.Id, dayOfWeek, i, group.Id, LessonFrequency.Constant))
+                                             {
+
+                                                 <table class="transparent_no_borders">
+                                                     <tr>
+                                                         <td rowspan="2">
+                                                             <span class="constant_schedule_item">
+                                                                 @Model.GetScheduleItem(Model.Semester.Id, dayOfWeek, i, group.Id, LessonFrequency.Constant).Lesson.Title
+                                                                 (@Model.GetScheduleItem(Model.Semester.Id, dayOfWeek, i, group.Id, LessonFrequency.Constant).LessonType)
+                                                                 @Model.GetScheduleItem(Model.Semester.Id, dayOfWeek, i, group.Id, LessonFrequency.Constant).Teacher.GetFullNameShort()
+                                                                 @Model.GetScheduleItem(Model.Semester.Id, dayOfWeek, i, group.Id, LessonFrequency.Constant).Classroom.Number
+                                                            </span>
+</td>
+                                                     </tr>
+                                                     <tr>
+                                                         <td></td>
+                                                     </tr>
+                                                 </table>
+                                             }
+                                             else
+                                             {
+                                                 <table class="transparent_no_borders">
+                                                     <tr>
+                                                         <td style="border-bottom: 1px solid silver">
+                                                             @if (Model.CheckScheduleItem(Model.Semester.Id, dayOfWeek, i, group.Id, LessonFrequency.Nominator))
+                                                             {
+                                                                 <span class="nominator_schedule_item">
+                                                                     @Model.GetScheduleItem(Model.Semester.Id, dayOfWeek, i, group.Id, LessonFrequency.Nominator).Lesson.Title
+                                                                     (@Model.GetScheduleItem(Model.Semester.Id, dayOfWeek, i, group.Id, LessonFrequency.Nominator).LessonType)
+                                                                     @Model.GetScheduleItem(Model.Semester.Id, dayOfWeek, i, group.Id, LessonFrequency.Nominator).Teacher.GetFullNameShort()
+                                                                     @Model.GetScheduleItem(Model.Semester.Id, dayOfWeek, i, group.Id, LessonFrequency.Nominator).Classroom.Number
+                                                            </span>
+@*                                                                 <hr class="custom_hr"/>*@
+                                                             }
+                                                             else
+                                                             {
+                                                                 @:&nbsp;
+                                                                 if (Model.StudLessonsLimitReached(dayOfWeek, group.Id, LessonFrequency.Nominator) == false && AccessMode == "Full")
+                                                                 {
+                                                                    <i id="add_lesson" lesson_frequensy="Nominator" parent_cell_id="@ScheduleRepository.GetSheduleItemKey(Model.Semester.Id, dayOfWeek, i, group.Id)" class="fa fa-plus fa-1x cursor_pointer fa-color-custom"></i>
+                                                                 }
+                                                             }
+                                                         </td>
+                                                     </tr>
+                                                     <tr>
+                                                         <td>
+                                                             @if (Model.CheckScheduleItem(Model.Semester.Id, dayOfWeek, i, group.Id, LessonFrequency.Denominator))
+                                                             {
+
+                                                                 <span class="denominator_schedule_item">
+                                                                     @Model.GetScheduleItem(Model.Semester.Id, dayOfWeek, i, group.Id, LessonFrequency.Denominator).Lesson.Title
+                                                                     (@Model.GetScheduleItem(Model.Semester.Id, dayOfWeek, i, group.Id, LessonFrequency.Denominator).LessonType)
+                                                                     @Model.GetScheduleItem(Model.Semester.Id, dayOfWeek, i, group.Id, LessonFrequency.Denominator).Teacher.GetFullNameShort()
+                                                                     @Model.GetScheduleItem(Model.Semester.Id, dayOfWeek, i, group.Id, LessonFrequency.Denominator).Classroom.Number
+                                                            </span>
+                                                             }
+                                                             else
+                                                             {
+                                                                 @:&nbsp;
+                                                                 if (Model.StudLessonsLimitReached(dayOfWeek, group.Id, LessonFrequency.Denominator) == false && AccessMode == "Full")
+                                                                 {
+                                                                    <i id="add_lesson" lesson_frequensy="Denominator" parent_cell_id="@ScheduleRepository.GetSheduleItemKey(Model.Semester.Id, dayOfWeek, i, group.Id)" class=" fa fa-plus fa-1x cursor_pointer fa-color-custom"></i>
+                                                                 }
+                                                             }
+                                                         </td>
+                                                     </tr>
+                                                 </table>
+
+
+
+
+                                             }
+                                        }
+                                        else
+                                        {
+                                                 <table class="table_add_lesson_buttons ">
+                                                <tr>
+                                                    <td rowspan="2">
+                                                        @if (Model.StudLessonsLimitReached(dayOfWeek, group.Id) == false && AccessMode == "Full")
+                                                        {
+                                                            <i id="add_lesson" lesson_frequensy="Constant" parent_cell_id="@ScheduleRepository.GetSheduleItemKey(Model.Semester.Id, dayOfWeek, i, group.Id)" class="fa fa-plus fa-2x cursor_pointer fa-color-custom"></i>
+                                                        }
+                                                       
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                </tr>
+                                            </table>
+                                        }
+
+@*                                        <table class="table_add_lesson_buttons">*@
+@*                                            <tr>*@
+@*                                                <td></td>*@
+@*                                            </tr>*@
+@*                                            <tr>*@
+@*                                                <td></td>*@
+@*                                            </tr>*@
+@*                                        </table>*@
+
+                                       
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    }
+
+                </table>
+
+            </div>
+        </div>
+
+@*    <div class="col-md-4">*@
+@**@
+@*    </div>*@
+
+    
+
+    </div>
+</div>
+
+
+<div id="lesson_dialog" class="" title="Add lesson">
+    
+</div>
+
+<style type="text/css">
+
+
+</style>
+
+
+@section scripts {
+    <script>
+        $(function() {
+//        
+
+            function parseScheduleItemId(id) {
+
+                console.log("parseScheduleItemId id=", id);
+
+                var info = id.split("_");
+
+                var obj = {
+                    semesterId: info[0],
+                    dayOfWeek: info[1],
+                    lessonNumber: info[2],
+                    groupId: info[3]
+                };
+
+                if (info.length === 5) {
+                    obj.lessonFrequency = info[4];
+                };
+
+                return obj;
+            }
+
+
+            //Select Cource
+            $("#selectCourse").change(function() {
+                var selectedValue = $("#selectCourse option:selected").val();
+
+                var actionUrl = "@Url.Action("View", "Schedule")" + "?course=" + selectedValue;
+                window.location.href = actionUrl;
+            });
+
+            function GetAddLessonFormFieldsValues(options) {
+                //hidden
+                var SemesterId = $("#SemesterId option:selected").val();
+                var DayOfWeek = $("#DayOfWeek option:selected").val();
+                var LessonNumber = $("#LessonNumber option:selected").val();
+                var GroupId = $("#GroupId option:selected").val();
+
+                var LessonId = $("#LessonId option:selected").val();
+                var LessonType = $("#LessonType option:selected").val();
+                var LessonFrequency = $("#LessonFrequency option:selected").val();
+                var TeacherId = $("#TeacherId option:selected").val();
+                var ClassroomId = $("#ClassroomId option:selected").val();
+
+                var res = {
+//                    SemesterId: SemesterId,
+//                    DayOfWeek: DayOfWeek,
+//                    LessonNumber: LessonNumber,
+//                    GroupId: GroupId,
+
+                    LessonId: LessonId,
+                    LessonType: LessonType,
+                    LessonFrequency: LessonFrequency,
+                    TeacherId: TeacherId,
+                    ClassroomId: ClassroomId,
+                };
+
+                if (options && options.hidden) {
+                    res.SemesterId = SemesterId;
+                    res.DayOfWeek = DayOfWeek;
+                    res.LessonNumber = LessonNumber;
+                    res.GroupId = GroupId;
+                }
+
+                return res;
+            }
+
+            function LoadTeachersForLesson(lessonId, lessonType, elId) {
+                var sendData = {
+                    id: lessonId,
+                    type: (lessonType === null || lessonType === undefined ? null : lessonType),
+                    elId: elId
+                };
+                console.log("sendData=", sendData);
+
+                $.ajax({
+                    url: "@Url.Action("TeachersForLesson", "Schedule")",
+                    data: sendData,
+                    success: function(dataArray) {
+
+                        var oldTeacherId = $("#TeacherId option:selected").val(); //save old value
+                        $("#TeacherId").empty(); //Clear select list
+
+                        //Display error under field
+                        if (dataArray.length === 0) {
+                            $('#lesson_dialog_error #error_text').html("<span>No available teachers were found!</span>");
+                            var errorMsgTemplate = $("#lesson_dialog_error").html();
+                            var parentEl = $("#TeacherId").parent("div");
+                            $("#TeacherId_error").remove();
+                            parentEl.append("<div id=TeacherId_error>" + errorMsgTemplate + "</div>");
+                        } else {
+                            $("#TeacherId_error").remove();
+                        }
+
+//                        //check if old selected value contains in new data
+//                        var searchRes = dataArray.filter(function (element, index, array) {
+//                            return element["Id"] == oldTeacherId;
+//                        });
+//                        console.log("searchRes=", searchRes);
+//                        if (searchRes.length === 1) {
+//                            
+//                        }
+
+                        $("#TeacherId").append($("<option value='' selected='selected'></option>")); //Add element to end
+                        //$("#TeacherId").append($("<option value=''></option>")); //Add element to end
+                        dataArray.forEach(function(item, i, dataArray) {
+                            var valueToDisplay = item.LastName + " " + item.FirstName + " " + item.MiddleName;
+                            var selected = (item.Id == oldTeacherId) ? "selected='selected'" : "";
+//                            console.log("item.ID=", item.Id);
+//                            console.log("oldTeacherId=", oldTeacherId);
+//                            console.log("(item.Id == oldTeacherId)=", (item.Id == oldTeacherId));
+                            $("#TeacherId").append($("<option value='" + item.Id + "' " + selected + ">" + valueToDisplay + "</option>")); //Add element to end
+                        });
+                    }
+                });
+            }
+
+            function LoadClassroomsForLesson(groupId, lessonType) {
+                $.ajax({
+                    url: "@Url.Action("ClassroomsForLesson", "Schedule")",
+                    data: {
+                        id: groupId,
+                        type: lessonType
+                    },
+                    success: function(dataArray) {
+
+                        $("#ClassroomId").empty(); //Clear select list
+
+                        //Display error under field
+                        if (dataArray.length === 0) {
+                            $('#lesson_dialog_error #error_text').html("<span>No available classrooms were found!</span>");
+                            var errorMsgTemplate = $("#lesson_dialog_error").html();
+                            var parentEl = $("#ClassroomId").parent("div");
+                            $("#ClassroomId_error").remove();
+                            parentEl.append("<div id=ClassroomId_error>" + errorMsgTemplate + "</div>");
+                        } else {
+                            $("#ClassroomId_error").remove();
+                        }
+
+                        $("#ClassroomId").append($("<option value='' selected='selected'></option>")); //Add element to end
+                        dataArray.forEach(function(item, i, dataArray) {
+                            var valueToDisplay = item.Number + " (" + item.Capacity + ")";
+                            $("#ClassroomId").append($("<option value='" + item.Id + "'>" + valueToDisplay + "</option>")); //Add element to end
+                        });
+                    }
+                });
+            }
+
+            //$('.schedule_div td.cell').dblclick(function(e) {
+            $('.schedule_div td.cell #add_lesson').click(function(e) {
+
+                var elementId = e.target.id;
+
+                var toElement = e.toElement;
+                var parent_cell_id = toElement.attributes.parent_cell_id.nodeValue;
+                var lesson_frequensy = toElement.attributes.lesson_frequensy.nodeValue;
+
+//                console.log(e);
+//                console.log(toElement);
+//
+//                console.log(parent_cell_id);
+//                console.log(lesson_frequensy);
+
+                var scheduleItemInfo = parseScheduleItemId(parent_cell_id + "_" + lesson_frequensy);
+                console.log(scheduleItemInfo);
+
+                $.ajax({
+                    url: "@Url.Action("_LessonForm", "Schedule")",
+                    data: scheduleItemInfo,
+                    success: function(data) {
+                        //console.log("data=", data);
+                        $("#lesson_dialog").html(data);
+
+                        //Render form selectpicker
+                        $('#lesson_dialog .selectpicker').selectpicker('render');
+
+
+                        //$("#LessonType").prop("disabled", true);
+                        $("#TeacherId").prop("disabled", true);
+                        $("#ClassroomId").prop("disabled", true);
+                        $("#FormSubmitButtom").prop("disabled", true);
+
+
+                        $('#lesson_add_form').submit(function (e) {
+//                            console.log("FORM SUBMIT");
+//                            console.log("formValues", GetAddLessonFormFieldsValues());
+                            var formValues = GetAddLessonFormFieldsValues();
+                            var showError = false;
+                            for (var prop in formValues) {
+                                if (formValues[prop] ===  undefined || formValues[prop] === "" || formValues[prop].length === 0) {
+                                    e.preventDefault();
+                                    showError = true;
+                                    break;
+                                }
+                            }
+
+                            if (showError === true) {
+                                $('#lesson_dialog_error #error_text').html("<span>All fields are reqired!</span>");
+                                var errorMsgTemplate = $("#lesson_dialog_error").html();
+                                var parentEl = $("#GeneralErrorPlace").parent("div");
+                                $("#GeneralError").remove();
+                                parentEl.append("<div id=GeneralError>" + errorMsgTemplate + "</div>");
+                            } else {
+                                $("#GeneralError").remove();
+                            }
+                        });
+
+
+                        $("#LessonId").change(function() {
+                            var lessonId = $("#LessonId option:selected").val();
+
+                            if (lessonId === "" || lessonId.length === 0) {
+                                $("#LessonType").prop("disabled", true);
+                                return;
+                            }
+
+                            var lessonType = $("#LessonType option:selected").val();
+                            if (lessonType === "" || lessonType.length === 0) {
+                                return;
+                            }
+
+                            //Load teachers
+                            LoadTeachersForLesson(lessonId, lessonType, parent_cell_id + "_" + lesson_frequensy);
+                        });
+
+                        $("#LessonType").change(function() {
+                            var lessonType = $("#LessonType option:selected").val();
+                            if (lessonType === "" || lessonType.length === 0) {
+                                return;
+                            }
+
+                            var lessonId = $("#LessonId option:selected").val();
+                            if (lessonId === "" || lessonId.length === 0) {
+                                return;
+                            }
+
+                            //Load teachers
+                            LoadTeachersForLesson(lessonId, lessonType, parent_cell_id + "_" + lesson_frequensy);
+
+                            var groupId = $("#GroupId").val();
+
+                            //Load classrooms available for lesson
+                            LoadClassroomsForLesson(groupId, lessonType);
+
+                            $("#TeacherId").prop("disabled", false);
+                        });
+
+//                        $("#LessonFrequency").change(function(e) {
+//                            var lessonFrequency = $("#LessonFrequency option:selected").val();
+//                            if (lessonFrequency === "" || lessonFrequency.length === 0) {
+//                                return;
+//                            }
+//
+//                            //get hidden fields
+//                            var dayOfWeek = $("#DayOfWeek").val();
+//                            var groupId = $("#GroupId").val();
+//
+//                            //Check freq
+//                            $.ajax({
+//                                url: "@Url.Action("StudLessonsLimitReached", "Schedule")",
+//                                data: {
+//                                    dayOfWeek: dayOfWeek,
+//                                    groupId: groupId,
+//                                },
+//                                success: function (dataObj) {
+//                                    //if limit reached for students to this day (nominator/den/const)
+//                                    if (dataObj.hasOwnProperty(lessonFrequency) && dataObj[lessonFrequency] === true) {
+//                                        //alert("limit");
+//                                        $("#LessonFrequency > option").each(function () {
+//                                            //alert(this.text + ' ' + this.value);
+//                                            console.log(e);
+//                                            console.log(this);
+//                                            console.log(this.selected, dataObj[this.value]);
+//                                            $(this).attr('disabled', dataObj[this.value]);
+//                                            if (this.selected === true && dataObj[this.value] === false) {
+//                                                e.preventDefault();
+//                                                alert("limit");
+//                                            }
+//                                        });
+//                                    }
+//                                }
+//                            });
+//                        });
+
+                        $("#TeacherId").change(function() {
+                            var selectedValue = $("#TeacherId option:selected").val();
+                            if (selectedValue === "" || selectedValue.length === 0) {
+                                $("#ClassroomId").prop("disabled", true);
+                                return;
+                            }
+
+                            $("#ClassroomId").prop("disabled", false);
+                        });
+
+                        $("#ClassroomId").change(function() {
+                            var selectedValue = $("#ClassroomId option:selected").val();
+                            if (selectedValue === "" || selectedValue.length === 0) {
+                                $("#FormSubmitButtom").prop("disabled", true);
+                                return;
+                            }
+
+                            $("#FormSubmitButtom").prop("disabled", false);
+                        });
+
+                        $("#lesson_dialog").dialog({
+                            width: 400
+                        });
+                    }
+                });
+            });
+
+            
+
+            
+
+            function Schedule() {
+
+            }
+        });
+    </script>
+    }
