@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="AdminLayout" class="admin-layout-container">
+
+    <div class="row">
+        <div class="col-lg-2">
+
+            <div class="admin-menu">
+                <div class="list-group">
+                    <a href="@Url.Action("Index", "Admin")" class="list-group-item">Dashboard</a>
+
+                    @Html.ActionLink("Groups", "Index", "Group", new { area = "Admin" }, new { @class = "list-group-item" })
+                    @Html.ActionLink("Teachers", "Index", "Teacher", new { area = "Admin" }, new { @class = "list-group-item" })
+                    @Html.ActionLink("Classrooms", "Index", "Classroom", new { area = "Admin" }, new { @class = "list-group-item" })
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-lg-10">
+            @RenderBody()
+        </div>
+    </div>
+
+</div>
+

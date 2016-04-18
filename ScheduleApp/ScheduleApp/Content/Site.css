@@ -61,3 +61,12 @@ input[type="checkbox"].input-validation-error {
 .navbar-custom a {
     color: white;
 }
+
+/*ADMIN*/
+.admin-layout-container {
+    margin-top: 10px;
+}
+
+.admin-menu {
+    margin-top: 20px;
+}

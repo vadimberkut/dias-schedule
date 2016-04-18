@@ -159,9 +159,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClassroomController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GroupController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TeacherController.cs" />
     <Compile Include="Context\ApplicationDbContext.cs" />
     <Compile Include="Context\ApplicationDbContextInitializer.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Global.asax.cs">
@@ -170,8 +175,10 @@
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\ScheduleHelper.cs" />
     <Compile Include="Helpers\Statics.cs" />
+    <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Classroom.cs" />
+    <Compile Include="Models\CustomError.cs" />
     <Compile Include="Models\Form3.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\GroupWorkload.cs" />
@@ -1088,6 +1095,23 @@
     <Content Include="Libs\bootstrap-select-1.10.0\sass\bootstrap-select.scss" />
     <Content Include="Libs\bootstrap-select-1.10.0\sass\variables.scss" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Group\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Group\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Group\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Group\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Group\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Teacher\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Teacher\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Teacher\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Teacher\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Teacher\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Classroom\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Classroom\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Classroom\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Classroom\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Classroom\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1128,12 +1152,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Schedule\Index.cshtml" />
     <Content Include="Views\Schedule\_LessonFormPartial.cshtml" />
+    <Content Include="Views\Error\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

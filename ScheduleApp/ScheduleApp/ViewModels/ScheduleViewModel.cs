@@ -37,7 +37,11 @@ namespace ScheduleApp.ViewModels
         public IEnumerable<Group> Groups;
         public IEnumerable<ScheduleItem> ScheduleItems;
 
-        public IEnumerable<Restriction> Restrictions; 
+        public IEnumerable<Restriction> Restrictions;
+
+        //public ApplicationUser User;
+
+        public bool BelongsToAdminRole = false;
 
         public bool CheckScheduleItem(int semesterId, string dayOfWeek, int lessonNumber, int groupId)
         {

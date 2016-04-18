@@ -4,12 +4,13 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using ScheduleApp.Helpers;
 using ScheduleApp.Models;
 
 namespace ScheduleApp.Context
 {
-    public class ApplicationDbContextInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
-    //public class ApplicationDbContextInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    //public class ApplicationDbContextInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
+    public class ApplicationDbContextInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext context)
         {
@@ -31,7 +32,8 @@ namespace ScheduleApp.Context
             {
                 var newUser = new ApplicationUser()
                 {
-                    UserName = "admin"
+                    UserName = "admin",
+                    ScheduleAccessMode = ScheduleAccessMode.Edit
                 };
                 var result = userManager.Create(newUser, "111111");
                 if (result.Succeeded)

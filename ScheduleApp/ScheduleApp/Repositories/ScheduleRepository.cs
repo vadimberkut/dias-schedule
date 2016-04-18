@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Data.Entity;
 using System.Linq;
+using Microsoft.AspNet.Identity;
+using ScheduleApp.Helpers;
 using ScheduleApp.Models;
 using ScheduleApp.ViewModels;
 
@@ -26,6 +28,10 @@ namespace ScheduleApp.Repositories
                 .ToList();
 
             vm.Restrictions = context.Restrictions.ToList();
+
+            //vm.User = 
+            string userName = System.Web.HttpContext.Current.User.Identity.GetUserName();
+            vm.BelongsToAdminRole = UserHelper.BelongsToAdminRole(userName);
 
             return vm;
         }

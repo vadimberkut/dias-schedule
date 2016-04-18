@@ -1,0 +1,13 @@
+﻿@model ScheduleApp.Models.CustomError
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-danger">Error!</h2>
+<h4 class="text-danger">Details:</h4>
+
+<div>
+    @Model.Message
+</div>
+

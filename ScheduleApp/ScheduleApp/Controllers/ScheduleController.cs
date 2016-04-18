@@ -7,6 +7,8 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using ScheduleApp.Helpers;
 using ScheduleApp.Models;
 using ScheduleApp.Repositories;
@@ -18,33 +20,60 @@ namespace ScheduleApp.Controllers
     {
         public ActionResult Index()
         {
-//            using (ApplicationDbContext context = new ApplicationDbContext())
-//            {
-//                int semesterId = context.Semesters.Single(i => i.StartsOn <= DateTime.Now && DateTime.Now <= i.EndsOn).Id; ;
-//                int course = 1;
-//
-//                ScheduleViewModel vm = ScheduleRepository.GetScheduleViewModel(semesterId, course);
-//
-//                return View("Index",vm);
-//            }
-
-            ApplicationDbContext context = new ApplicationDbContext();
-            int semesterId = context.Semesters.Single(i => i.StartsOn <= DateTime.Now && DateTime.Now <= i.EndsOn).Id;
-            int course = 1;
-
-            return RedirectToAction("View", new {course = course});
+            return RedirectToAction("View", new {course = 1});
         }
 
-        public ActionResult View(int course)
+        public ActionResult View(int course = 1)
         {
             using (ApplicationDbContext context = new ApplicationDbContext())
             {
-                int semesterId = context.Semesters.Single(i => i.StartsOn <= DateTime.Now && DateTime.Now <= i.EndsOn).Id; ;
+                int semesterId = ScheduleHelper.GetCurrentSemesterId();
 
                 ScheduleViewModel vm = ScheduleRepository.GetScheduleViewModel(semesterId, course);
 
+               //If user is admin then load access mode
+                string userName = HttpContext.User.Identity.GetUserName();
+                ViewBag.AccessMode = ScheduleAccessMode.View.ToString();
+                if (HttpContext.User.IsInRole("Admin"))
+                {                 
+                    var roleStore = new RoleStore<IdentityRole>(context);
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    var userStore = new UserStore<ApplicationUser>(context);
+                    var userManager = new UserManager<ApplicationUser>(userStore);
+
+                    var adminUser = userManager.FindByName(userName);
+                   // var adminUser2 = context.Users.Single(i => i.UserName.ToString() == userName);
+                    ViewBag.AccessMode = adminUser.ScheduleAccessMode.ToString();
+                }
+
                 return View("Index", vm);
             }
+        }
+
+        public ActionResult ChangeAcessMode(ScheduleAccessMode mode)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            if (HttpContext.User.IsInRole("Admin"))
+            {                 
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+
+                string userName = HttpContext.User.Identity.GetUserName();
+                var adminUser = userManager.FindByName(userName);
+                adminUser.ScheduleAccessMode = mode;
+                try
+                {
+                    userManager.Update(adminUser);
+                }
+                catch (Exception ex)
+                {
+                    return RedirectToAction("View","Error",new CustomError(ex.Message));
+                }
+                string previousUrl = System.Web.HttpContext.Current.Request.UrlReferrer.AbsoluteUri;
+                //return RedirectToAction("View", "Schedule", new { course = 1 });
+                return Redirect(previousUrl);
+            }
+            return RedirectToAction("View", "Error", new CustomError("Access Denied"));
         }
 
         public PartialViewResult _LessonForm(int semesterId, string dayOfWeek, int lessonNumber, int groupId, LessonFrequency lessonFrequency = LessonFrequency.Constant)
@@ -142,18 +171,25 @@ namespace ScheduleApp.Controllers
 
         public JsonResult TeachersForLesson(int id, LessonType type, string elId)
         {
-            ScheduleItemIdModel model = ScheduleHelper.ParseScheduleItemId(elId);
+            ScheduleItemIdModel idModel = ScheduleHelper.ParseScheduleItemId(elId);
 
             int lessonId = id;
             LessonType lessonType = type;
             ApplicationDbContext context = new ApplicationDbContext();
 
-            //var scheduleItemsForLesson = context.ScheduleItems.Where(i => i.LessonId == lessonId);
-
-            //Check Hours
+            //Find teachers for this lesson number (to check further if teacher is unavailable)
+            var teacherLessonsAcordingToElId = context.ScheduleItems
+                .Where(
+                    i =>
+                        i.SemesterId == idModel.SemesterId && i.DayOfWeek == idModel.DayOfWeek &&
+                        i.LessonNumber == idModel.LessonNumber && i.LessonFrequency == idModel.LessonFrequency)
+                .ToList();
+            var teacherLessonsIdsAcordingToElId = teacherLessonsAcordingToElId.Select(j => j.TeacherId).ToList();
+            
             var teachers = context.Form3s
                 .Where(i => i.LessonId == lessonId && i.LessonType == lessonType)
-                .Where(k => (context.ScheduleItems.Count(i => i.LessonId == lessonId && i.TeacherId == k.TeacherId)) <= k.Hours)
+                .Where(k => (context.ScheduleItems.Count(i => i.LessonId == lessonId && i.TeacherId == k.TeacherId)) <= k.Hours) //Check GENERAL Hours
+                .Where(z => teacherLessonsIdsAcordingToElId.Contains(z.TeacherId) == false) //Check acording to elId
                 .Select(j => j.Teacher).ToList();
 
             //Check Max Lessons For This Day
@@ -164,13 +200,13 @@ namespace ScheduleApp.Controllers
 
             List<ScheduleItem> scheduleItemsForDay = context.ScheduleItems.Where(
                     i =>
-                        i.SemesterId == model.SemesterId && i.DayOfWeek == model.DayOfWeek &&
-                        i.GroupId == model.GroupId
+                        i.SemesterId == idModel.SemesterId && i.DayOfWeek == idModel.DayOfWeek 
+                        //&& i.GroupId == idModel.GroupId
                         ).ToList();
 
             List<ScheduleItem> scheduleItemsForLesson = scheduleItemsForDay.Where(
                     i =>
-                        i.LessonNumber == model.LessonNumber
+                        i.LessonNumber == idModel.LessonNumber
                         ).ToList();
 
             List<Teacher> teachersFiltered = new List<Teacher>();
@@ -190,21 +226,21 @@ namespace ScheduleApp.Controllers
                             (i.LessonFrequency == LessonFrequency.Constant || i.LessonFrequency == LessonFrequency.Denominator))
                         .Count();
 
-                if (model.LessonFrequency == LessonFrequency.Constant)
+                if (idModel.LessonFrequency == LessonFrequency.Constant)
                 {
                     if (numOfLessonsNominator < maxLessons && numOfLessonsDeminator < maxLessons)
                     {
                         teachersFiltered.Add(teacher);
                     }
                 }
-                else if (model.LessonFrequency == LessonFrequency.Nominator)
+                else if (idModel.LessonFrequency == LessonFrequency.Nominator)
                 {
                     if (numOfLessonsNominator < maxLessons)
                     {
                         teachersFiltered.Add(teacher);
                     }
                 }
-                else if (model.LessonFrequency == LessonFrequency.Denominator)
+                else if (idModel.LessonFrequency == LessonFrequency.Denominator)
                 {
                     if (numOfLessonsDeminator < maxLessons)
                     {
@@ -214,28 +250,20 @@ namespace ScheduleApp.Controllers
             }
             teachers = teachersFiltered;
 
-
-//            int numOfLessonsNominator =
-//                scheduleItems.Where(
-//                    i => 
-//                        (i.LessonFrequency == LessonFrequency.Constant || i.LessonFrequency == LessonFrequency.Nominator))
-//                    .Count();
-//            int numOfLessonsDeminator =
-//                scheduleItems.Where(
-//                    i =>
-//                        (i.LessonFrequency == LessonFrequency.Constant || i.LessonFrequency == LessonFrequency.Denominator))
-//                    .Count();
-
             return Json(teachers, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ClassroomsForLesson(int id,ClassroomType type)
+        public JsonResult ClassroomsForLesson(ClassroomType type, string elId)
         {
-            int groupId = id;
             ApplicationDbContext context = new ApplicationDbContext();
 
-            var group = context.Groups.Single(i => i.Id == groupId);
-            var classrooms = context.Classrooms.Where(i => i.Capacity >= group.StudentsAmount && i.Type == type).ToList();
+            ScheduleItemIdModel idModel = ScheduleHelper.ParseScheduleItemId(elId);
+
+//            var group = context.Groups.Single(i => i.Id == groupId);
+//            var classrooms = context.Classrooms.Where(i => i.Capacity >= group.StudentsAmount && i.Type == type).ToList();
+
+            //
+            List<ClassroomInfoModel> classrooms = ScheduleHelper.GetFreeClassrooms(type, idModel);
 
             return Json(classrooms, JsonRequestBehavior.AllowGet);
         }
