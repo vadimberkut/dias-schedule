@@ -16,6 +16,7 @@ namespace ScheduleApp.Models
     {
         public ApplicationDbContext()
             : base("DefaultConnection")
+            //: base("ScheduleDb")
         {
             Database.SetInitializer<ApplicationDbContext>(new ApplicationDbContextInitializer());
         }
